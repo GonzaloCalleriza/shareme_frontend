@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { HiMenu } from 'react-icon/hi';
+import { HiMenu } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { Link, Route, Routes } from 'react-router-dom';
 
@@ -43,7 +43,7 @@ const Home = () => {
                         <img src={logo} alt='logo' className='w-28'/>
                     </Link>
                     <Link to={`user-profile/${user?._id}`} >
-                        <img src={user?.image} alt='userImage' className='w-28' /> 
+                        <img src={user?.image} alt='userImage' className='w-28 rounded-3xl' /> 
                     </Link>
                 </div>
                 {toggleSidebar && (
