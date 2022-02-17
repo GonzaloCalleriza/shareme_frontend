@@ -14,7 +14,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
     const navigate = useNavigate();
     const user = fetchUser();
 
-    const alreadySaved = !!(save?.filter((item) => item.postedBy._id === user.googleId))?.length;
+    const alreadySaved = !!(save?.filter((item) => item?.postedBy?._id === user?.googleId))?.length;
 
     const savePin = (id) => {
         if(!alreadySaved) {
@@ -23,10 +23,10 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                 .setIfMissing({ save: [] })
                 .insert('after', 'save[-1]', [{
                     _key: uuidv4(),
-                    userId: user.googleId,
+                    userId: user?.googleId,
                     postedBy: {
                         _type: 'postedBy',
-                        _ref: user.googleId
+                        _ref: user?.googleId
                     }
                 }])
                 .commit()
@@ -93,10 +93,10 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                                     className='bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:100 hover:shadow-md'
                                 >
                                     <BsFillArrowUpRightCircleFill />
-                                    {destination.length > 20 ? <p>destination.slice(8, 20) ...</p> : destination.slice(8)}
+                                    {destination.length > 20 ? <p>destination.slice(0,20) ...</p> : destination}
                                 </a>
                             )}
-                            {postedBy?._id === user.googleId && (
+                            {postedBy?._id === user?.googleId && (
                                 <button
                                 onClick={(e) => {
                                     e.stopPropagation();

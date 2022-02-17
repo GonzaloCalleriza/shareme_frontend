@@ -33,11 +33,13 @@ const CreatePin = ({ user }) => {
                 .upload('image', e.target.files[0], { contentType: type, filename: name  })
                 .then((document) => {
                     setImageAsset(document);
-                    setLoading(false);
                 })
                 .catch((error) => {
                     console.log('Image upload error', error);
                 })
+                .finally((() => {
+                    setLoading(false);
+                }))
         } else {
             setWrongImageType(true)
         }
@@ -68,7 +70,7 @@ const CreatePin = ({ user }) => {
             client.create(doc)
                 .then(() => {
                     navigate('/')
-                })
+                });
         } else {
             setFields(true);
 
